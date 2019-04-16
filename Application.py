@@ -2,14 +2,12 @@ from Functions import *
 
 waitEntry = True
 
-while waitEntry==True:
-    print('Escolha a opção: ')
+while waitEntry == True:
+    print('Choose the option: ')
     print('c: Create new number in the Database')
     print('s: Show de coletion in the Database')
-    print('u: -')
+    print('u: Update colection')
     print('d: Delete the values into the coletion')
-    print('h: -')
-    print('o: -')
     print('e: Exit. ')
 
     choice = choiceUser()
@@ -21,7 +19,7 @@ while waitEntry==True:
         showData()
 
     elif choice == 'u':
-        waitEntry = False
+        updateData()
 
     elif choice == 'd':
         deleteData()
@@ -31,3 +29,4 @@ while waitEntry==True:
 
     else:
         print('Invalid input, take a value from the options! ')
+        waitEntry = True

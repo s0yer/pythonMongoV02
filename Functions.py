@@ -13,7 +13,7 @@ def showData():
 
     client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
     db = client['ERP']  # acessa o database
-    books = db['AleatoryNumbers']  # acessa a coleção dentro do banco de dados
+    books = db['Numbers']  # acessa a coleção dentro do banco de dados
 
     # retorna os valores dentro da coleção AleatoryNumbers
     for b in books.find():
@@ -23,7 +23,7 @@ def createNumbersDatabase():
 
     client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
     db = client.ERP  # conecta com a bases de dados ERP
-    col = db.AleatoryNumbers  # recupera a tabela que queremos usar
+    col = db.Numbers  # recupera a tabela que queremos usar
 
     x = 0
     seed()
@@ -38,9 +38,18 @@ def createNumbersDatabase():
 def deleteData():
     client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
     db = client.ERP  # conecta com a bases de dados ERP
-    col = db.AleatoryNumbers  # recupera a tabela que queremos usar
+    col = db.Numbers  # recupera a tabela que queremos usar
 
     x = 0
     while (x < 200):
         col.delete_one({"id": x})
         x = x + 1
+
+def updateData():
+    client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
+    db = client.ERP  # conecta com a bases de dados ERP
+    col = db.Numbers  # recupera a tabela que queremos usar
+
+    books = db['Numbers']  # acessa a coleção dentro do banco de dados
+    for b in books.find():
+        col.update({"intnum": 7},{"$set":{"intnum": 300}})
