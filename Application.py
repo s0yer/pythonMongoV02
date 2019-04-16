@@ -7,7 +7,7 @@ while waitEntry==True:
     print('c: Create new number in the Database')
     print('s: Show de coletion in the Database')
     print('u: -')
-    print('d: -')
+    print('d: Delete the values into the coletion')
     print('h: -')
     print('o: -')
     print('e: Exit. ')
@@ -24,7 +24,7 @@ while waitEntry==True:
         waitEntry = False
 
     elif choice == 'd':
-        waitEntry = False
+        deleteData()
 
     elif choice == 'e':
         waitEntry = False

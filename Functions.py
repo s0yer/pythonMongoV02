@@ -12,7 +12,6 @@ def choiceUser():
 def showData():
 
     client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
-    connectionDB()
     db = client['ERP']  # acessa o database
     books = db['AleatoryNumbers']  # acessa a coleção dentro do banco de dados
 
@@ -23,16 +22,25 @@ def showData():
 def createNumbersDatabase():
 
     client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
-    x = 0
-    k = 0
-
-    seed()
     db = client.ERP  # conecta com a bases de dados ERP
     col = db.AleatoryNumbers  # recupera a tabela que queremos usar
+
+    x = 0
+    seed()
 
     # gera numeros aleatorios e popula a coleção AleatoryNumbers
     while (x < 200):
         k = randrange(0, 200)
-        col.insert_one({"intnum": k})
+        col.insert_one({"id": x , "intnum": k })
 
+        x = x + 1
+
+def deleteData():
+    client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
+    db = client.ERP  # conecta com a bases de dados ERP
+    col = db.AleatoryNumbers  # recupera a tabela que queremos usar
+
+    x = 0
+    while (x < 200):
+        col.delete_one({"id": x})
         x = x + 1
