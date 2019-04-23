@@ -3,10 +3,14 @@ from pymongo import *
 
 # this function will be implemented later
 def connectionDB():
-    client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
-    db = client.ERP  # conecta com a bases de dados ERP
-    col = db.Numbers  # recupera a tabela que queremos usar
-    return col
+    try:
+        client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
+        db = client.ERP  # conecta com a bases de dados ERP
+        col = db.Numbers  # recupera a tabela que queremos usar
+        return col
+
+    except:
+        return "Error of database connection"
 
 def makeBooks():
     client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
@@ -47,3 +51,4 @@ def updateData():
 
     for b in makeBooks().find():
         connectionDB().update({"intnum": 100},{"$set":{"intnum": 300}})
+        print(b)
