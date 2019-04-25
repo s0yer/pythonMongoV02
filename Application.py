@@ -1,6 +1,7 @@
 from Functions import *
 from tkinter import *
 
+
 class Application:
     def __init__(self, master=None):
         self.widget1 = Frame(master)
@@ -43,6 +44,12 @@ class Application:
         self.exit["command"] = self.widget1.quit
         self.exit.pack()
 
+        self.pdf = Button(self.widget1)
+        self.pdf["text"] = "Write in PDF"
+        self.pdf["font"] = ("Arial", "9")
+        self.pdf["width"] = 16
+        self.pdf["command"] = self.writePDF
+        self.pdf.pack()
 
     def createNumDB(self):
         createNumbersDatabase()
@@ -55,6 +62,10 @@ class Application:
 
     def updateDB(self):
         updateData()
+
+    def writePDF(selfs):
+        historicPDF()
+
 
 root = Tk()
 Application(root)

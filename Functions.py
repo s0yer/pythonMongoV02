@@ -1,5 +1,7 @@
 from random import *
 from pymongo import *
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
 
 # this function will be implemented later
 def connectionDB():
@@ -10,7 +12,7 @@ def connectionDB():
         return col
 
     except:
-        return "Error of database connection"
+        return "Error of database connection..."
 
 def makeBooks():
     client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
@@ -52,3 +54,16 @@ def updateData():
     for b in makeBooks().find():
         connectionDB().update({"intnum": 100},{"$set":{"intnum": 300}})
         print(b)
+
+def historicPDF(args):
+    try:
+        nameFile = "NumbersHistoric.pdf"
+        cnv = canvas.Canvas(nameFile, pagesize= A4)
+        print(A4)
+
+        posX = mm2p(comprim/2.0 + offsetX)
+        cnv.drawCentredString(posX, mm2p(posY, showData())
+        cnv.save
+
+    except:
+        print("Write PDF Error... ")
