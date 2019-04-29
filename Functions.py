@@ -3,21 +3,29 @@ from pymongo import *
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 
+log = "Message"
+
 # this function will be implemented later
-def connectionDB():
+def connectionDB(String log):
     try:
         client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
         db = client.ERP  # conecta com a bases de dados ERP
         col = db.Numbers  # recupera a tabela que queremos usar
+        log = "Connection of DataBase OK"
+        logHistory()
         return col
 
     except:
-        return "Error of database connection..."
+        log = "Error of database connection..."
+        return log
 
-def makeBooks():
+def makeBooks(String log):
     client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
     db = client['ERP']  # acessa o database
     books = db['Numbers']  # acessa a coleção dentro do banco de dados
+    log = "Acess to database OK"
+    logHistory()
+
     return books
 
 def choiceUser():
@@ -29,6 +37,8 @@ def showData():
     # retorna os valores dentro da coleção AleatoryNumbers
     for b in makeBooks().find():
         print(b)
+    log = " Show data base"
+    logHistory()
 
 def createNumbersDatabase():
 
@@ -55,7 +65,7 @@ def updateData():
         connectionDB().update({"intnum": 100},{"$set":{"intnum": 300}})
         print(b)
 
-def historicPDF(args):
+def logHistory():
     try:
         nameFile = "NumbersHistoric.pdf"
         cnv = canvas.Canvas(nameFile, pagesize= A4)
@@ -63,7 +73,10 @@ def historicPDF(args):
 
         posX = mm2p(comprim/2.0 + offsetX)
         cnv.drawCentredString(posX, mm2p(posY, showData())
-        cnv.save
+        cnv.save()
+
+        return print(log)
 
     except:
-        print("Write PDF Error... ")
+
+        return print("Write PDF Error... ")
