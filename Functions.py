@@ -28,44 +28,65 @@ def makeBooks(String log):
 
     return books
 
-def choiceUser():
+def choiceUser(String log):
     choice = input('Sua escolha: ')
+    log = "call de function to choose a option"
+    logHistory()
     return choice
 
-def showData():
+def showData(String log):
 
     # retorna os valores dentro da coleção AleatoryNumbers
     for b in makeBooks().find():
         print(b)
-    log = " Show data base"
+    log = "Show data base"
     logHistory()
 
-def createNumbersDatabase():
+def createNumbersDatabase(String log):
 
-    x = 0
-    seed()
+    try:
+        x = 0
+        seed()
 
-    # gera numeros aleatorios e popula a coleção AleatoryNumbers
-    while (x < 200):
-        k = randrange(0, 200)
-        connectionDB().insert_one({"id": x , "intnum": k })
+        # gera numeros aleatorios e popula a coleção AleatoryNumbers
+        while (x < 200):
+            k = randrange(0, 200)
+            connectionDB().insert_one({"id": x , "intnum": k })
 
-        x = x + 1
+            x = x + 1
 
-def deleteData():
+        log = "Create numbers with sucess!"
 
-    x = 0
-    while (x < 200):
-        connectionDB().delete_one({"id": x})
-        x = x + 1
+    except:
+        log = "Error to create numbers.."
+        return print(log)
 
-def updateData():
+def deleteData(String log):
 
-    for b in makeBooks().find():
-        connectionDB().update({"intnum": 100},{"$set":{"intnum": 300}})
-        print(b)
+    try:
+        x = 0
+        while (x < 200):
+            connectionDB().delete_one({"id": x})
+            x = x + 1
+        log = "Detele data with sucess!"
 
-def logHistory():
+    except:
+        log = "Error to delete data.."
+        return print(log)
+
+def updateData(String log):
+
+    try:
+        for b in makeBooks().find():
+            connectionDB().update({"intnum": 100},{"$set":{"intnum": 300}})
+            print(b)
+    log = "Update Database with sucess!"
+
+    except:
+        log = "Error to update DataBase.."
+        return print(log)
+
+def logHistory(String log):
     try:
         nameFile = "NumbersHistoric.pdf"
         cnv = canvas.Canvas(nameFile, pagesize= A4)
