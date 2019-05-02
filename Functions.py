@@ -5,44 +5,53 @@ from reportlab.lib.pagesizes import A4
 
 log = "Message"
 
+def logHistory(log):
+    try:
+
+        return print(log)
+
+    except:
+
+        return print("Write PDF Error... ")
+
 # this function will be implemented later
-def connectionDB(String log):
+def connectionDB():
     try:
         client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
         db = client.ERP  # conecta com a bases de dados ERP
         col = db.Numbers  # recupera a tabela que queremos usar
         log = "Connection of DataBase OK"
-        logHistory()
+        logHistory(log)
         return col
 
     except:
         log = "Error of database connection..."
         return log
 
-def makeBooks(String log):
+def makeBooks():
     client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
     db = client['ERP']  # acessa o database
     books = db['Numbers']  # acessa a coleção dentro do banco de dados
     log = "Acess to database OK"
-    logHistory()
+    logHistory(log)
 
     return books
 
-def choiceUser(String log):
+def choiceUser():
     choice = input('Sua escolha: ')
     log = "call de function to choose a option"
-    logHistory()
+    logHistory(log)
     return choice
 
-def showData(String log):
+def showData():
 
     # retorna os valores dentro da coleção AleatoryNumbers
     for b in makeBooks().find():
         print(b)
     log = "Show data base"
-    logHistory()
+    logHistory(log)
 
-def createNumbersDatabase(String log):
+def createNumbersDatabase():
 
     try:
         x = 0
@@ -56,12 +65,12 @@ def createNumbersDatabase(String log):
             x = x + 1
 
         log = "Create numbers with sucess!"
-
+        logHistory(log)
     except:
         log = "Error to create numbers.."
         return print(log)
 
-def deleteData(String log):
+def deleteData():
 
     try:
         x = 0
@@ -69,35 +78,21 @@ def deleteData(String log):
             connectionDB().delete_one({"id": x})
             x = x + 1
         log = "Detele data with sucess!"
+        logHistory(log)
 
     except:
         log = "Error to delete data.."
         return print(log)
 
-def updateData(String log):
+def updateData():
 
     try:
         for b in makeBooks().find():
             connectionDB().update({"intnum": 100},{"$set":{"intnum": 300}})
             print(b)
-    log = "Update Database with sucess!"
-
+        log = "Update Database with sucess!"
+        logHistory(log)
     except:
         log = "Error to update DataBase.."
         return print(log)
 
-def logHistory(String log):
-    try:
-        nameFile = "NumbersHistoric.pdf"
-        cnv = canvas.Canvas(nameFile, pagesize= A4)
-        print(A4)
-
-        posX = mm2p(comprim/2.0 + offsetX)
-        cnv.drawCentredString(posX, mm2p(posY, showData())
-        cnv.save()
-
-        return print(log)
-
-    except:
-
-        return print("Write PDF Error... ")
