@@ -7,11 +7,9 @@ log = "Message"
 
 def logHistory(log):
     try:
-
         return print(log)
 
     except:
-
         return print("Write PDF Error... ")
 
 # this function will be implemented later
@@ -37,11 +35,6 @@ def makeBooks():
 
     return books
 
-def choiceUser():
-    choice = input('Sua escolha: ')
-    log = "call de function to choose a option"
-    logHistory(log)
-    return choice
 
 def showData():
 
