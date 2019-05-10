@@ -3,6 +3,7 @@ from tkinter import *
 
 
 class Application:
+
     def __init__(self, master=None):
         self.widget1 = Frame(master)
         self.widget1.pack()
