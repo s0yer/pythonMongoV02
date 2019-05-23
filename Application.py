@@ -1,7 +1,7 @@
 from Functions import *
 from tkinter import *
 
-
+# Classe de aplicação de interface gráfica
 class Application:
 
     def __init__(self, master=None):
