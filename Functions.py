@@ -1,13 +1,14 @@
 from random import *
 from pymongo import *
 
-#bibliotecas que serão utilizadas em implementações posteriores para implementação do log
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
+# bibliotecas que serão utilizadas em implementações posteriores para implementação do log
+# libraries that will be used in later deployments for log implementation
+# from reportlab.pdfgen import canvas
+# from reportlab.lib.pagesizes import A4
 
 log = "Message"
 
-#Função referente ao log de erros quando uma função é executada
+# Função referente ao log de erros quando uma função é executada / Function regarding error log when a function is executed
 def logHistory(log):
     try:
         return print(log)
@@ -15,14 +16,13 @@ def logHistory(log):
     except:
         return print("Write PDF Error... ")
 
-# this function will be implemented later
 
-# Faz a conexão com banco de dados para manipulação de dados
+# Faz a conexão com banco de dados para manipulação de dados /  Make connection to database for data manipulation
 def connectionDB():
     try:
-        client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
-        db = client.ERP  # conecta com a bases de dados ERP
-        col = db.Numbers  # recupera a tabela que queremos usar
+        client = MongoClient('localhost', 27017)  # conecta em um cliente do mongoDB que esta funcionando em sua máquina / connects on a mongoDB client that is running on your machine
+        db = client.ERP  # conecta com a bases de dados ERP / connects to ERP databases
+        col = db.Numbers  # recupera a tabela que queremos usar / retrieve the table we want to use
         log = "Connection of DataBase OK"
         logHistory(log)
         return col
@@ -31,33 +31,33 @@ def connectionDB():
         log = "Error of database connection..."
         return log
 
-#Acessa banco de dados para recuperação de dados
+# Acessa banco de dados para recuperação de dados / Access database for data recovery
 def makeBooks():
-    client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina
-    db = client['ERP']  # acessa o database
-    books = db['Numbers']  # acessa a coleção dentro do banco de dados
+    client = MongoClient('localhost', 27017)  # conectaem um cliente do mongoDB que esta funcionando em sua máquina / connect a mongoDB client running on your machine
+    db = client['ERP']  # acessa o database / access the database
+    books = db['Numbers']  # acessa a coleção dentro do banco de dados / accesses the collection within the database
     log = "Acess to database OK"
     logHistory(log)
 
     return books
 
-# Função que recupera dados
+# Função que retorna dados / Function that returns data
 def showData():
 
-    # retorna os valores dentro da coleção AleatoryNumbers
+    # retorna os valores dentro da coleção AleatoryNumbers / returns values within the AleatoryNumbers collection
     for b in makeBooks().find():
         print(b)
     log = "Show data base"
     logHistory(log)
 
-#Cria 200 numeros inteiros aleatórios no range de 0 - 1000
+# Cria 200 numeros inteiros aleatórios no range de 0 - 1000 / Creates 200 random integers in the 0 - 1000 range
 def createNumbersDatabase():
 
     try:
         x = 0
         seed()
 
-        # gera numeros aleatorios e popula a coleção AleatoryNumbers
+        # gera numeros aleatorios e popula a coleção AleatoryNumbers / generates random numbers and populates the AleatoryNumbers collection
         while (x < 200):
             k = randrange(0, 1000)
             connectionDB().insert_one({"id": x , "intnum": k })
@@ -70,8 +70,7 @@ def createNumbersDatabase():
         log = "Error to create numbers.."
         return print(log)
 
-#Deleta os 200 numeros aleatórios criados pela função createNumbersDatabase
-def deleteData():
+# Deleta os 200 numeros aleatórios criados pela função createNumbersDatabase / Delete the 200 random numbers created by the createNumbersDatabase
 
     try:
         x = 0
@@ -85,7 +84,7 @@ def deleteData():
         log = "Error to delete data.."
         return print(log)
 
-#Atualiza os valores que são igual a 100 para 0
+# Atualiza os valores que são igual a 100 para 0 / Updates values that are equal to 100 for 0
 def updateData():
 
     try:

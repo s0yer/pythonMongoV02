@@ -1,7 +1,7 @@
 from Functions import *
-from tkinter import *
+from tkinter import * # Biblioteca interface gráfica / Graphic interface library
 
-# Classe de aplicação de interface gráfica
+# Classe de aplicação de interface gráfica / # Classe de aplicação de interface gráfica /
 class Application:
 
     def __init__(self, master=None):
