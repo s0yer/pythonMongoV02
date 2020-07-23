@@ -85,6 +85,7 @@ def createNumbersDatabase():
         return print(log)
 
 # Atualiza os valores que são igual a 100 para 0 / Updates values that are equal to 100 for 0
+
 def updateData():
 
     try:
